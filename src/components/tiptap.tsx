@@ -1,15 +1,25 @@
-'use client'
+"use client";
 
-import { useEditor, EditorContent } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import MenuBar from "@/components/menubar";
 
 const Tiptap = () => {
   const editor = useEditor({
-    extensions: [StarterKit],
-    content: '<p>Hello World! 🌎️</p>',
-  })
+    extensions: [StarterKit, Underline],
+    content: "<p>ここにテキストを入力してください。</p>",
+  });
 
-  return <EditorContent editor={editor} />
-}
+  const content = editor?.getHTML();
 
-export default Tiptap
+  return (
+    <div>
+      <MenuBar editor={editor} />
+      <EditorContent editor={editor} />
+      {content}
+    </div>
+  );
+};
+
+export default Tiptap;
